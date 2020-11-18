@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using CQRS_Demo.Domain;
 using CQRS_Demo.Domain.Commands;
 using CQRS_Demo.Domain.Events;
+using CQRS_Demo.Domain.Queries;
 
 namespace CQRS_Demo.Tests
 {
@@ -12,8 +15,11 @@ namespace CQRS_Demo.Tests
         protected Seat_has_been_reserved Seat_has_been_reserved(Guid screening, Guid seat, Guid customer) => new Seat_has_been_reserved(screening, seat, customer);
         protected Screening_has_been_planned Screening_has_been_planned(Guid screening, DateTime date, Guid cinema) => new Screening_has_been_planned(screening, date, cinema);
         protected Seat_cannot_be_reserved Seat_cannot_be_reserved(Guid screening, Guid seat) => new Seat_cannot_be_reserved(screening, seat);
-
-
+        protected My_reservations My_reservations(Guid customer) => new My_reservations(customer);
+        protected ReservationInfo Reservations(params Reservation[] reservations) => new ReservationInfo(reservations.ToList()); 
+        protected Reservation Reservation(Guid screening, Guid seat) => new Reservation(screening, seat);
+        
+        
         // Any Value that is needed to describe a test, but that has no respective ValueType in the domain.
         // Keeping your test clean and easier to write through exploration with intellisense
         protected DateTime December_2nd_2020() => new DateTime(2020, 12, 02);
@@ -29,4 +35,5 @@ namespace CQRS_Demo.Tests
         protected Guid Seat_A2() => Guid.Parse("4E5DAC6B-E898-4653-91C6-941204E64BFC"); // Reference to the second seat in row A in Cinema 1
         protected Guid Screening_1() => Guid.Parse("42F573B3-257B-48C3-BC94-7ACC37C5D3F4"); // Reference to the screening of "Avengers End Game" on december the second.}
     }
+
 }

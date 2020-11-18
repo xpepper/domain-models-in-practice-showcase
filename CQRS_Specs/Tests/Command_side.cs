@@ -1,5 +1,3 @@
-using System;
-using CQRS_Demo.Domain.Events;
 using NUnit.Framework;
 
 namespace CQRS_Demo.Tests

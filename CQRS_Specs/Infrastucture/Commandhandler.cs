@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CQRS_Demo.Domain;
+using CQRS_Demo.Domain.Aggregates;
 using CQRS_Demo.Domain.Commands;
 
 namespace CQRS_Demo.Infrastucture
@@ -33,6 +33,5 @@ namespace CQRS_Demo.Infrastucture
             }
         }
     }
-
 
 }

@@ -7,7 +7,7 @@ namespace CQRS_Demo.Domain.Events
         public Guid Screening;
         public Guid Seat;
         public Guid Customer;
-
+        
         public Seat_has_been_reserved(Guid screening, Guid seat, Guid customer)
         {
             Screening = screening;
