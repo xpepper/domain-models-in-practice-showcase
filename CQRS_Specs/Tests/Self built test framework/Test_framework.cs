@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CQRS_Demo.Domain.Readmodels;
 using CQRS_Demo.Infrastucture;
 using FluentAssertions;
 using NUnit.Framework;
@@ -11,6 +12,7 @@ namespace CQRS_Demo.Tests
         private List<object> _history;
         private List<object> _published_events;
         private object _queried_response;
+        private Customer_reservations _readmodel; 
 
         [SetUp]
         public void Setup()
@@ -21,17 +23,26 @@ namespace CQRS_Demo.Tests
         }
 
 
-        protected void Given(params object[] events) => _history = events.ToList();
+        protected void Given(params object[] events)
+        {
+            _history = events.ToList();
+            _readmodel = new Customer_reservations(_history);
+        }
 
         protected void When(object command)
         {
-            var handler = new Commandhandler(_history, e => _published_events.Add(e));
+
+            var handler = new Commandhandler(_history, e =>
+            {
+                _published_events.Add(e);
+                _readmodel.Project(e); // This is a simplyfied version of the observer pattern
+            });
             handler.handle(command);
         }
 
         protected void When_Query(object query)
         {
-            var handler = new QueryHandler(_history, r => _queried_response = r);
+            var handler = new QueryHandler(_readmodel, _history, r => _queried_response = r);
             handler.handle(query);
         }
 

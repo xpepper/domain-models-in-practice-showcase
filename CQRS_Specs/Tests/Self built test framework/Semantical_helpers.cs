@@ -33,6 +33,7 @@ namespace CQRS_Demo.Tests
         protected Guid Cinema_1() => Guid.Parse("EC15243D-58D5-470D-922D-730FAAFB1B36"); // Reference to Cinema 1 in the first floor
         protected Guid Seat_A1() => Guid.Parse("108F0340-C954-44E3-84C2-6CD453351553"); // Reference to the first seat in row A in Cinema 1
         protected Guid Seat_A2() => Guid.Parse("4E5DAC6B-E898-4653-91C6-941204E64BFC"); // Reference to the second seat in row A in Cinema 1
+        protected Guid Seat_A3() => Guid.Parse("FF87BBFF-6C84-4DD8-A658-9FCE5D94CF1B"); // Reference to the third seat in row A in Cinema 1
         protected Guid Screening_1() => Guid.Parse("42F573B3-257B-48C3-BC94-7ACC37C5D3F4"); // Reference to the screening of "Avengers End Game" on december the second.}
     }
 

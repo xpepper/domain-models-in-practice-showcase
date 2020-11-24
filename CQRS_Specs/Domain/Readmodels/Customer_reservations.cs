@@ -17,6 +17,8 @@ namespace CQRS_Demo.Domain.Readmodels
             }
         }
 
+        public void Project(dynamic e) => Apply(e);
+
         private void Apply(object e) { }
         private void Apply(Seat_has_been_reserved e)
         {

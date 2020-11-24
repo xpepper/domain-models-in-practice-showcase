@@ -13,19 +13,20 @@ namespace CQRS_Demo.Infrastucture
     {
         public List<object> History;
         public Action<object> Respond;
-
-        public QueryHandler(List<object> history, Action<object> respond)
+        private Customer_reservations _readmodel;
+        public QueryHandler(Customer_reservations customer_reservations_readmodel, List<object> history, Action<object> respond)
         {
             History = history;
             Respond = respond;
+            _readmodel = customer_reservations_readmodel; // For this demo we just inject one readmodel. In production you'd want to register all readmodels in here.
         }
 
         public void handle(object query)
         {
+            
             if (query is My_reservations q) 
             {
-                var readmodel = new Customer_reservations(History);
-                Respond(new ReservationInfo(readmodel.Reservations[q.Customer]));
+                Respond(new ReservationInfo(_readmodel.Reservations[q.Customer]));
                 // Did I just forget to check if the customer actually exist?
                 // Well, there would never be a query with an illegal customer, right? :D:D:D
             }
